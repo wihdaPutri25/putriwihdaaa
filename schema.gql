@@ -1,0 +1,66 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type PelangganModel {
+  id: Int!
+  nim: String!
+  nama: String!
+  email: String
+  nomorTelepon: String!
+}
+
+type KendaraanModel {
+  id: Int!
+  merek: String!
+  model: String!
+  nomorPlat: String!
+  status: String!
+}
+
+type PenyewaanModel {
+  id: Int!
+  tanggalSewa: DateTime!
+  totalBiaya: Int!
+  tarifPerHari: Int
+  tarifPerBulan: Int
+  pelangganId: Int!
+  kendaraanId: Int!
+  pelanggan: PelangganModel!
+  kendaraan: KendaraanModel!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  penyewaanList: [PenyewaanModel!]!
+  penyewaan(id: Int!): PenyewaanModel
+}
+
+type Mutation {
+  createPenyewaan(input: CreatePenyewaanInput!): PenyewaanModel!
+  updatePenyewaan(input: UpdatePenyewaanInput!): PenyewaanModel
+  deletePenyewaan(id: Int!): PenyewaanModel
+}
+
+input CreatePenyewaanInput {
+  pelangganId: Int!
+  kendaraanId: Int!
+  totalBiaya: Int!
+  tarifPerHari: Int
+  tarifPerBulan: Int
+  tanggalSewa: DateTime!
+}
+
+input UpdatePenyewaanInput {
+  id: Int!
+  pelangganId: Int
+  kendaraanId: Int
+  totalBiaya: Int
+  tarifPerHari: Int
+  tarifPerBulan: Int
+  tanggalSewa: DateTime
+}
